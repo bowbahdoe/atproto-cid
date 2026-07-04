@@ -10,4 +10,20 @@
 </dependency>
 ```
 
-Provides a single class which allows for representing
+Provides a single class which allows for representing a CID directly in code. 
+
+You can obtain a CID from its string representation.
+
+```java
+var cid = CID.fromString("bafkreifozdmpkf2slviaknu6zlzyupmcakwybxth37kaxqndpw56ghejfq");
+```
+
+Or from various other factory methods.
+
+```java
+CID.fromSha256Bytes(...);
+CID.fromSha256HexString(...);
+CID.fromUnhashedBytes(...);
+```
+
+CIDs can be serialized using `toString()` as well as Jackson or the `Serializable` mechanism.
