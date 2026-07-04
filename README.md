@@ -9,3 +9,5 @@
     <version>2026.07.03</version>
 </dependency>
 ```
+
+Provides a single class which allows for representing

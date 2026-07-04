@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.mccue.atproto.cid.CID;
 import org.junit.jupiter.api.Test;
 
@@ -59,5 +60,19 @@ public class CIDTest {
         try (var ois = new ObjectInputStream(bais)) {
             assertEquals(ois.readObject(), CID.fromString("bafkreifozdmpkf2slviaknu6zlzyupmcakwybxth37kaxqndpw56ghejfq"));
         }
+    }
+
+    @Test
+    public void jsonSerializeTest() throws Exception {
+        var objectMapper = new ObjectMapper();
+        assertEquals(
+                "\"bafkreifozdmpkf2slviaknu6zlzyupmcakwybxth37kaxqndpw56ghejfq\"",
+                objectMapper.writeValueAsString(CID.fromString("bafkreifozdmpkf2slviaknu6zlzyupmcakwybxth37kaxqndpw56ghejfq"))
+        );
+
+        assertEquals(
+                CID.fromString("bafkreifozdmpkf2slviaknu6zlzyupmcakwybxth37kaxqndpw56ghejfq"),
+                objectMapper.readValue("\"bafkreifozdmpkf2slviaknu6zlzyupmcakwybxth37kaxqndpw56ghejfq\"", CID.class)
+        );
     }
 }

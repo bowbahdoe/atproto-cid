@@ -1,5 +1,7 @@
 package dev.mccue.atproto.cid;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.apache.commons.codec.binary.Base32;
 
 import module java.base;
@@ -94,6 +96,7 @@ public final class CID implements Serializable {
         return new Base32().decode(s.substring(1));
     }
 
+    @JsonCreator
     public static CID fromString(String s) {
         return fromCIDBytes(stringEncodedToByteString(s));
     }
@@ -162,6 +165,7 @@ public final class CID implements Serializable {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         var cidBytes = sha256BytesToCIDBytes(codec, digest);
         return "b" + bytesToBase32(cidBytes);
